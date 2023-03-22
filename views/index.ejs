@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Todo</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Todo List</h1>
+    <p>Welcome to my todo list</p>
+    <form action="/create" method="POST">
+      <input type="text" name="title" placeholder="todo 標題" required>
+      <input type="text" name="description" placeholder="說明" required>
+      <input type="date" name="due_date" placeholder="截止日期" required>
+      <input type="submit" value="Submit">
+    </form>
+    <% todos.forEach( function( todo ){ %>
+      <h2><%= todo.title %></h2>
+      <p><%= todo.description %></p>
+      <p>Due Date:<%= todo.due_date %></p>
+      <a href="/delete/<%= todo._id %>" title="Delete this todo item">Delete</a>
+      <button onclick="showmodal('<%=todo.title%>', '<%=todo.description%>', '<%=todo.due_date%>','<%=todo._id%>')">編輯
+      </button>
+    <% }); %>
+    <div class="editModal"></div>
   </body>
 </html>
+<script>
+  function showmodal(title, description, due_date, _id) {
+    var modal = document.querySelector('.editModal');
+    modal.innerHTML = `
+      <form action="/update/`+_id+`" method="POST">
+        <input type="text" name="title" value="`+title+`" required>
+        <input type="text" name="description" value="`+description+`" required>
+        <input type="date" name="due_date" value="`+due_date+`" required>
+        <input type="submit" value="Submit">
+      </form>
+    `;
+    modal.style.display = 'block';
+    modal.style.height = '20vh';
+  }
+</script>
