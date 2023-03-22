@@ -18,9 +18,12 @@ router.post('/create', express.json(),async (req, res, next) =>{
   const todo = new Todo({
     //這邊填入需要傳入 mongoDB 的資料
     _id: new mongoose.Types.ObjectId(),
-    title: req.body.title,
-    description: req.body.description,
-    due_date: req.body.due_date
+    //我們需要從 req.body 中取得 title, description, due_date
+    /*
+    title: ...,
+    description: ...,
+    due_date: ...,
+     */
   });
   //因傳輸資料為非同步，所以要用 await，並用 try catch 包起來，若有錯誤就會跳到 catch
   try{
@@ -33,9 +36,12 @@ router.post('/create', express.json(),async (req, res, next) =>{
 router.post('/update/:id', express.json(),async (req, res, next) =>{
   const id = req.params.id;
   const todo = {
-    title: req.body.title,
-    description: req.body.description,
-    due_date: req.body.due_date
+    //我們需要從 req.body 中取得 title, description, due_date
+    /*
+    title: ...,
+    description: ...,
+    due_date: ...,
+     */
   };
   try{
     const newTodo = await Todo.updateOne({_id: id}, todo);

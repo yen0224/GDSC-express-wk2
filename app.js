@@ -13,11 +13,12 @@ const TodoSchema = require('./models/todo');
 
 const app = express();
 require('dotenv').config()
+
 //setup mongoose connection
 const mongoose = require('mongoose');
 //setup mongoDB Atlas connection info
+//if not workable, please change the url provided on the site
 const url =`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.reaeelm.mongodb.net/?retryWrites=true&w=majority`
-//console.log(mongourl)
 //connect
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 //get connection
